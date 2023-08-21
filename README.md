@@ -14,7 +14,7 @@
     - caesar_cipher.py
 
 ## Requirements
-- The current project uses modules like random, os....to be continued.
+- The current project uses modules: random, os, tqdm.
 
 ## Who wrote this?
 The program was written by Anuraag Mishra (anuraagmishra.214@gmail.com) as a leisurely project. I was learning Python to improve and decided to apply it to a project of my own to get some experience and to have some fun. This was the result!
