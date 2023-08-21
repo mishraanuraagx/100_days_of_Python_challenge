@@ -8,6 +8,11 @@
 
 -You can also add new words to the included `wordlist.txt` file to be used in the game. Words can be added at any place in the file but, again, add one word per line.
 
+## Command-Line
+- Some python-scripts support command-line:
+    - password_generator.py
+    - caesar_cipher.py
+
 ## Requirements
 - The current project uses modules like random, os....to be continued.
 

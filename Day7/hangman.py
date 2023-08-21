@@ -8,7 +8,6 @@ words = []
 def read_words_from_file():
     with open("wordlist.txt", 'r') as f:
         words = f.readlines()
-    print(words[1:10])
     return words
 
 words = read_words_from_file()
