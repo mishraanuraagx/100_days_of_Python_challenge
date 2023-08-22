@@ -22,4 +22,5 @@ The program was written by Anuraag Mishra (anuraagmishra.214@gmail.com) as a lei
 ### Day7 - Hangman
 - WordList was obtained from <https://github.com/Tom25/Hangman>
 - ASCII art from <https://gist.github.com/chrishorton/8510732aa9a80a03c829b09f12e20d9c>
-- ASCII logo from <https://ascii.co.uk/art/hangman>
+
+- ASCII logo from <https://ascii.co.uk/art/>
