@@ -61,4 +61,4 @@ class Draw:
 
 draw = Draw()
 draw.spirograph()
-draw.screen.exitonclick()
+draw.screen
