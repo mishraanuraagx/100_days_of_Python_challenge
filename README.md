@@ -1,3 +1,7 @@
+## ART
+### Spirograph
+![img.png](img.png)
+
 ## How to Use
 ### Day7- Hangman
     Playing this Hangman game is easy: Simply download the repository to your computer and run `hangman.py`! The game comes with its own included word list, `wordlist.txt`, which contains a list of 58,000+ English words from which the game can draw.
