@@ -6,6 +6,9 @@ import time
 class Snake:
     def __init__(self):
         self.scoreboard = None
+        self.high_score = 0
+        self.speed = 0.3
+        self.read_save_file()
         self.auto_move = False
         self.food = None
         self.direction = None
@@ -23,8 +26,16 @@ class Snake:
             (-self.box_width / 2, -self.box_width / 2), (-self.box_width / 2, self.box_width / 2),
             (self.box_width / 2, self.box_width / 2),
             (self.box_width / 2, -self.box_width / 2)))
+        self.instruction_drawer = None
         self.reset()
         self.key_bind()
+
+    def read_save_file(self):
+        with open('save.file', mode='r') as file:
+            content = file.readlines()
+            print(content)
+            self.high_score = int(content[0].replace("\n","").split("=")[1])
+            self.speed = float(content[1].replace("\n","").split("=")[1])
 
     def get_score(self):
         return len(self.snake) - self.initial_size
@@ -36,7 +47,7 @@ class Snake:
             self.scoreboard.sety(self.height / 2)
             self.scoreboard.hideturtle()
         self.scoreboard.clear()
-        self.scoreboard.write(f"Score: {self.get_score()}", font=("Arial", 16, "normal"))
+        self.scoreboard.write(f"Score: {self.get_score()}, High Socre: {self.high_score}", align='center', font=("Arial", 16, "normal"))
 
     def create_starter_snake(self):
         x = 0
@@ -69,6 +80,7 @@ class Snake:
     #     pass
 
     def start_stop(self):
+        self.instruction_drawer.clear()
         self.auto_move = not self.auto_move
         if self.auto_move:
             self.move()
@@ -76,7 +88,7 @@ class Snake:
     def move(self):
         while self.auto_move:
             self.screen.update()
-            time.sleep(0.3)
+            time.sleep(self.speed)
             new_posx, new_posy = self.get_next_pos()
 
             food_in_front = self.something_in_front(self.food.pos()[0], self.food.pos()[1], new_posx, new_posy)
@@ -86,6 +98,7 @@ class Snake:
                 self.auto_move = False
                 # show message and score
                 time.sleep(2)
+                self.write_save_file()
                 self.reset()
                 break
 
@@ -140,11 +153,16 @@ class Snake:
         self.direction = 'right'
         self.food = self.place_food()
         self.auto_move = False
-        self.score = self.get_score()
         self.update_score()
         self.draw_boundary()
+        self.score = self.get_score()
+        self.print_instruction()
+        self.screen.update()
 
-
+    def write_save_file(self):
+        with open('save.file', mode='w') as file:
+            if self.get_score() > self.high_score: self.high_score = self.get_score()
+            file.write(f'high_score = {self.high_score} \n snake_speed = {self.speed}')
 
     def get_next_pos(self):
         first_box = self.snake[0]
@@ -238,6 +256,17 @@ class Snake:
         if new_posx >= self.width / 2 or new_posx <= -self.width / 2 or new_posy >= self.height / 2 or new_posy <= -self.height / 2:
             return True
         return False
+
+
+    def print_instruction(self):
+        if self.instruction_drawer == None:
+            self.instruction_drawer = td_module.Turtle()
+        self.instruction_drawer.penup()
+        self.instruction_drawer.color("black")
+        self.instruction_drawer.hideturtle()
+        self.instruction_drawer.clear()
+        self.instruction_drawer.goto(0,40)
+        self.instruction_drawer.write(f"Press Space to Start.",align='center', font=("Arial", 16, "normal"))
 
 
 snake = Snake()
